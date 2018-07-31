@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var ManifestPlugin = require('webpack-manifest-plugin');
 var path = require('path');
+
 var optimization = {
   splitChunks: {
       cacheGroups: {
@@ -13,8 +14,13 @@ var optimization = {
       }
   }
 };
+var options = {
+  fileName: 'manifest.json',
+  basePath: './dist/'
+}
 
 module.exports = {
+  mode: 'development',
   entry: {
     main: './app/index.js',
     vendor: [
@@ -28,9 +34,6 @@ module.exports = {
   },
   optimization: optimization,
   plugins: [
-    new ManifestPlugin({
-      fileName: 'manifest.json',
-      basePath: './dist/'
-    })
+    new ManifestPlugin()
   ]
 }
